@@ -21,7 +21,7 @@ namespace CurrencyExchangeApp
 
                 ExchangeApp.Configure(repository, encoder, documentParser, url);
 
-                ConsoleUI ui = new ConsoleUI();
+                ConsoleUI ui = new ConsoleUI(ExchangeApp.Instance);
                 await ui.RunAsync();
             }
             catch (Exception ex)

@@ -7,7 +7,6 @@ namespace CurrencyExchangeApp
     public class ExchangeApp
     {
         private static ExchangeApp instance;
-        private static readonly object lockObj = new object();
 
         private IRemoteRepository repository;
         private IEncoder encoder;
@@ -32,13 +31,9 @@ namespace CurrencyExchangeApp
             {
                 throw new InvalidOperationException("ExchangeApp Singleton is already configured.");
             }
-            lock (lockObj)
-            {
-                if (instance == null)
-                {
-                    instance = new ExchangeApp(repo, enc, doc, url);
-                }
-            }
+            
+
+            instance = new ExchangeApp(repo, enc, doc, url);
         }
 
         public static ExchangeApp Instance
@@ -69,11 +64,6 @@ namespace CurrencyExchangeApp
         public double Convert(string from, string to, double amount)
         {
             return exchange.Convert(from, to, amount);
-        }
-
-        public void SetDocument(IDocument document)
-        {
-            this.document = document;
         }
     }
 }

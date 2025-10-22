@@ -4,11 +4,11 @@ namespace CurrencyExchangeApp.UI
 {
     public class ConsoleUI
     {
-        private ExchangeApp app;
+        private readonly ExchangeApp app;
 
-        public ConsoleUI()
+        public ConsoleUI(ExchangeApp app)
         {
-            this.app = ExchangeApp.Instance;
+            this.app = app ?? throw new ArgumentNullException(nameof(app));
         }
 
         public async Task RunAsync()
